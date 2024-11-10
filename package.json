@@ -1,0 +1,23 @@
+{
+  "name": "excalidraw-presentation",
+  "version": "1.0.0",
+  "description": "Add presentation feature to the excalidraw library",
+  "keywords": [
+    "excalidraw",
+    "presentation"
+  ],
+  "homepage": "https://github.com/mukeshsoni/excalidraw-presentation",
+  "bugs": {
+    "url": "https://github.com/mukeshsoni/excalidraw-presentation/issues"
+  },
+  "author": "Mukesh Soni <mukeshsoni@gmail.com> (https://twitter.com/mukeshsoni)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mukeshsoni/excalidraw-presentation.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "license": "MIT"
+}
