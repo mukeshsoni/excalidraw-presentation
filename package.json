@@ -17,11 +17,15 @@
   },
   "scripts": {
     "build": "tsc",
-    "ci": "npm run build"
+    "ci": "npm run build",
+    "format": "prettier --write ."
   },
   "files": [
     "dist"
   ],
   "type": "module",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
 }
