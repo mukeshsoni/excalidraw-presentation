@@ -21,7 +21,9 @@
     "ci": "npm run build && npm run check-format && npm run check-exports",
     "format": "prettier --write .",
     "check-format": "prettier --check .",
-    "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm"
+    "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
+    "local-release": "changeset version && changeset publish",
+    "prepublishOnly": "npm run ci"
   },
   "files": [
     "dist"
@@ -30,6 +32,7 @@
   "license": "MIT",
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.16.4",
+    "@changesets/cli": "^2.27.9",
     "prettier": "^3.3.3"
   }
 }
