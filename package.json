@@ -15,6 +15,10 @@
     "type": "git",
     "url": "git+https://github.com/mukeshsoni/excalidraw-presentation.git"
   },
+  "scripts": {
+    "build": "tsc",
+    "ci": "npm run build"
+  },
   "files": [
     "dist"
   ],
