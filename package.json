@@ -29,6 +29,7 @@
   "type": "module",
   "license": "MIT",
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.16.4",
     "prettier": "^3.3.3"
   }
 }
