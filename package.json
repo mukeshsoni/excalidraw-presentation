@@ -15,9 +15,11 @@
     "type": "git",
     "url": "git+https://github.com/mukeshsoni/excalidraw-presentation.git"
   },
-  "main": "dist/index.js",
+  "main": "dist/excalidraw-presentation.esm.js",
+  "types": "dist/types/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "dev": "vite",
+    "build": "tsc && vite build",
     "ci": "npm run build && npm run check-format && npm run check-exports",
     "format": "prettier --write .",
     "check-format": "prettier --check .",
@@ -30,9 +32,20 @@
   ],
   "type": "module",
   "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.16.4",
     "@changesets/cli": "^2.27.9",
-    "prettier": "^3.3.3"
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }

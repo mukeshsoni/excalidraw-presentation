@@ -10,6 +10,7 @@
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
 
+    "jsx": "react",
     /* Strictness */
     "strict": true,
     "noUncheckedIndexedAccess": true,
@@ -18,6 +19,7 @@
     /* If transpiling with TypeScript: */
     "module": "NodeNext",
     "outDir": "dist",
+    "declarationDir": "dist/types",
     "rootDir": "src",
     "sourceMap": true,
 
@@ -26,5 +28,7 @@
 
     /* AND if you're building for a library in a monorepo: */
     "declarationMap": true
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
