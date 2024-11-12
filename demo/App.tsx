@@ -192,7 +192,7 @@ const App = () => {
           </button>
         </Footer>
       </Excalidraw>
-      {editorRef.current && showPresentationSidebar ? (
+      {editorRef.current ? (
         <ExcalidrawPresentation
           canvasId={'c1'}
           presName={'Presentation 1'}

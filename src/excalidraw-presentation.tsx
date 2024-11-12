@@ -163,9 +163,9 @@ export function Presentation({
     }
   }, [isPresentationMode, currentSlideIndex, goToSlide]);
   function handlePresentationStartClick() {
+    console.log('onPresentationStart');
     setPresentationMode(true);
     onPresentationStart();
-    // containerRef.current?.requestFullscreen();
   }
   function handlePresentationEndClick() {
     setPresentationMode(false);
@@ -330,6 +330,7 @@ export function Presentation({
       elements: getFrameElements(editorRef, frame!.id).elements,
     }));
 
+  console.log({ isPresentationMode });
   return (
     <div ref={containerRef} id="excalidraw-presentation">
       {isPresentationMode ? (
@@ -348,31 +349,33 @@ export function Presentation({
           onDownloadAsPpt={handleDownloadAsPpt}
         />
       ) : null}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          boxSizing: 'border-box',
-          zIndex: 100,
-          position: 'absolute',
-          boxShadow: '0 8px 20px 0 #00000033',
-          top: 0,
-          bottom: 0,
-          width: 320,
-          background: '#f5f5f5',
-          right: 0,
-        }}
-      >
-        <PresentationSidebar
-          editorRef={editorRef}
-          slides={slides}
-          onPresentationStartClick={handlePresentationStartClick}
-          onSlideOrderChange={handleSlideOrderChange}
-          onClose={handleSidebarClose}
-          onDownloadAsPdf={handleDownloadAsPdf}
-          onDownloadAsPptx={handleDownloadAsPpt}
-        />
-      </div>
+      {showPresentationSidebar ? (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            boxSizing: 'border-box',
+            zIndex: 100,
+            position: 'absolute',
+            boxShadow: '0 8px 20px 0 #00000033',
+            top: 0,
+            bottom: 0,
+            width: 320,
+            background: '#f5f5f5',
+            right: 0,
+          }}
+        >
+          <PresentationSidebar
+            editorRef={editorRef}
+            slides={slides}
+            onPresentationStartClick={handlePresentationStartClick}
+            onSlideOrderChange={handleSlideOrderChange}
+            onClose={handleSidebarClose}
+            onDownloadAsPdf={handleDownloadAsPdf}
+            onDownloadAsPptx={handleDownloadAsPpt}
+          />
+        </div>
+      ) : null}
       {isPresentationMode ? (
         <div
           style={{

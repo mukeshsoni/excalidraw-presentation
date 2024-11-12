@@ -121,7 +121,7 @@ function useListItem(props: any) {
   return {
     focused: false,
     onActivate: () => {},
-    getItemProps: ({ style }: { style: React.CSSProperties }) => ({
+    getItemProps: (props: { style: React.CSSProperties }) => ({
       'aria-disabled': false,
     }),
   };
