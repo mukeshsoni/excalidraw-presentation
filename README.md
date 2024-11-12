@@ -8,6 +8,7 @@ This component allows you to wrap elements in your Excalidraw canvas in frames a
 It also allows you do download the presentation as a PDF or a Powerpoint file and share it with others.
 
 ### How to use it
+
 You can import `ExcalidrawPresentation` from `excalidraw-presentation` and use it as shown below:
 
 ```tsx
