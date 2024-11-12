@@ -6,20 +6,11 @@ import React from 'react';
 import type { DragEndEvent } from '@dnd-kit/core';
 import { DndContext } from '@dnd-kit/core';
 import { SortableContext, useSortable, arrayMove } from '@dnd-kit/sortable';
-import { Cancel, DotsVertical } from '@planview/pv-icons';
 import { CSS } from '@dnd-kit/utilities';
 import type {
   ExcalidrawElement,
   ExcalidrawFrameElement,
 } from '@excalidraw/excalidraw/types/element/types';
-import { color, cursor, spacing } from '@planview/pv-utilities';
-import {
-  ButtonPrimary,
-  ButtonEmpty,
-  DropdownMenu,
-  Tooltip,
-  ListItem,
-} from '@planview/pv-uikit';
 import { ExcalidrawPreview } from './preview';
 import type { Slide } from './excalidraw-presentation';
 
@@ -137,32 +128,8 @@ export function PresentationSidebar({
           >
             `Slides ${slides.length}`
             <div style={{ display: 'flex' }}>
-              {slides.length > 0 ? (
-                <DropdownMenu
-                  label="Presentation actions"
-                  alignRight
-                  trigger={(props) => (
-                    <Tooltip unwrapped text="Presentation actions">
-                      <ButtonEmpty
-                        {...props}
-                        icon={<DotsVertical />}
-                        activated={props['aria-expanded']}
-                        aria-label="Presentation actions"
-                      />
-                    </Tooltip>
-                  )}
-                >
-                  <ListItem
-                    label="Download as PDF"
-                    onActivate={onDownloadAsPdf}
-                  ></ListItem>
-                  <ListItem
-                    label="Download as PPTX"
-                    onActivate={onDownloadAsPptx}
-                  ></ListItem>
-                </DropdownMenu>
-              ) : null}
-              <ButtonEmpty onClick={onClose} icon={<Cancel />} />
+              {slides.length > 0 ? <div>TODO: dropdown</div> : null}
+              <button onClick={onClose}>×</button>
             </div>
           </div>
           <div
@@ -184,13 +151,13 @@ export function PresentationSidebar({
         </div>
       </DndContext>
       <div style={{ width: '100%' }}>
-        <ButtonPrimary
+        <button
           onClick={onPresentationStartClick}
           style={{ width: '100%' }}
           disabled={slides.length === 0}
         >
           Begin presentation
-        </ButtonPrimary>
+        </button>
       </div>
     </div>
   );
@@ -214,11 +181,11 @@ function SlidePreview({ editorRef, frameId }: SlidePreviewProps) {
       {...attributes}
       {...listeners}
       style={{
-        marginBottom: spacing.medium,
+        marginBottom: 20,
         position: 'relative',
-        borderRadius: spacing.medium,
-        border: `1px solid ${color.gray200}`,
-        padding: spacing.small,
+        borderRadius: 20,
+        border: `1px solid #dddddd`,
+        padding: 10,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -242,11 +209,11 @@ function SlidePreview({ editorRef, frameId }: SlidePreviewProps) {
           width: '101%',
           display: 'flex',
           alignItems: 'center',
-          padding: spacing.small,
-          backgroundColor: color.gray100,
+          padding: 10,
+          backgroundColor: '#eeeeee',
           opacity: 0.9,
-          borderRadius: `0 0 ${spacing.medium}px ${spacing.medium}px`,
-          color: color.gray600,
+          borderRadius: `0 0 ${10}px ${20}px`,
+          color: '#555555',
         }}
       >
         {frame !== undefined ? frame.name : 'Untitled'}

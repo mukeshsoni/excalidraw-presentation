@@ -60,7 +60,7 @@ export type Slide = {
   frameId: string;
 };
 type Props = {
-  whiteboardId: number;
+  canvasId: number | string; // To uniquely store slides in local storage
   presName: string;
   showPresentationSidebar: boolean;
   editorRef: React.RefObject<ExcalidrawImperativeAPI>;
@@ -68,7 +68,7 @@ type Props = {
   onSidebarClose: () => void;
 };
 export function Presentation({
-  whiteboardId,
+  canvasId,
   presName,
   showPresentationSidebar,
   editorRef,
@@ -81,7 +81,7 @@ export function Presentation({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [slidesFromLocalStorage, setSlides] = useLocalStorage<Array<Slide>>(
-    `presentation-${whiteboardId}-frame-ids`,
+    `presentation-${canvasId}-frame-ids`,
     [],
   );
   // We know that slides will not change if slidesFromLocalStorage does not change
@@ -331,7 +331,7 @@ export function Presentation({
     }));
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} id="excalidraw-presentation">
       {isPresentationMode ? (
         <PresentationToolbar
           frames={frames}
@@ -359,7 +359,7 @@ export function Presentation({
           top: 0,
           bottom: 0,
           width: 320,
-          background: 'f5f5f5',
+          background: '#f5f5f5',
           right: 0,
         }}
       >

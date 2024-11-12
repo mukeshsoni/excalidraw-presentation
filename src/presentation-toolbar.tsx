@@ -2,18 +2,6 @@
 /* eslint jsx-a11y/no-noninteractive-element-interactions: 0 */
 /* eslint jsx-a11y/no-noninteractive-element-interactions: 0 */
 import React from 'react';
-import { color, shadow, spacing } from '@planview/pv-utilities';
-import {
-  FilePdf,
-  FilePowerpoint,
-  FlowItemsAll,
-  GoToNextHorizontal,
-  GoToPreviousHorizontal,
-  ResizeFull,
-  ResizeSmall,
-} from '@planview/pv-icons';
-import { DropdownMenu, useListItem } from '@planview/pv-uikit';
-import { ButtonDestructive, ButtonEmpty } from '@planview/pv-uikit/lib/button';
 import {
   ExcalidrawElement,
   ExcalidrawFrameElement,
@@ -85,21 +73,12 @@ export function PresentationToolbar({
             marginRight: '20px',
           }}
         >
-          <ButtonEmpty
-            icon={<GoToPreviousHorizontal />}
-            onClick={onPrevSlideClick}
-            disabled={currentSlideIndex === 0}
-          />
-          <Space w={spacing.small} />
-          <DropdownMenu
-            label="Slide selector"
-            trigger={(props) => (
-              <ButtonEmpty {...props}>
-                Slide {currentSlideIndex + 1} / {totalSlides}
-              </ButtonEmpty>
-            )}
-            width={250}
-          >
+          <button onClick={onPrevSlideClick} disabled={currentSlideIndex === 0}>
+            {'<'}
+          </button>
+          <Space w={10} />
+          <div style={{ display: 'none' }}>
+            TODO: Slide selector
             {frames.map((frame) => (
               <SlideItem
                 label={frame.name || 'Untitled'}
@@ -109,39 +88,44 @@ export function PresentationToolbar({
                 files={files}
               />
             ))}
-          </DropdownMenu>
-          <Space w={spacing.small} />
-          <ButtonEmpty
-            icon={<GoToNextHorizontal />}
+          </div>
+          <Space w={10} />
+          <button
             onClick={onNextSlideClick}
             disabled={currentSlideIndex === totalSlides - 1}
-          />
-          <Space w={spacing.small} />
-          <ButtonEmpty
-            icon={isFullscreen ? <ResizeSmall /> : <ResizeFull />}
-            onClick={toggleFullscreen}
-          />
-          <Space w={spacing.small} />
-          <ButtonEmpty icon={<FilePdf />} onClick={onDownloadAsPdf}>
-            Pdf
-          </ButtonEmpty>
-          <Space w={spacing.small} />
-          <ButtonEmpty icon={<FilePowerpoint />} onClick={onDownloadAsPpt}>
-            Ppt
-          </ButtonEmpty>
+          >
+            {'>'}
+          </button>
+          <Space w={10} />
+          <button onClick={toggleFullscreen}>Fullscreen</button>
+          <Space w={10} />
+          <button onClick={onDownloadAsPdf}>Pdf</button>
+          <Space w={10} />
+          <button onClick={onDownloadAsPpt}>Ppt</button>
         </div>
-
-        <ButtonDestructive
-          icon={<FlowItemsAll />}
-          onClick={onPresentationEndClick}
-        >
-          "End presentation"
-        </ButtonDestructive>
+        <button onClick={onPresentationEndClick}>End presentation</button>
       </div>
     </div>
   );
 }
 
+const color = {
+  gray100: '#eeeeee',
+  gray200: '#dddddd',
+  gray600: '#555555',
+};
+
+function useListItem(props: any) {
+  // TODO
+
+  return {
+    focused: false,
+    onActivate: () => {},
+    getItemProps: ({ style }: { style: React.CSSProperties }) => ({
+      'aria-disabled': false,
+    }),
+  };
+}
 // eslint-disable-next-line
 type UseListItemProps = typeof useListItem extends (props: infer P) => any
   ? P
@@ -161,19 +145,20 @@ function SlideItem({
       {...getItemProps({
         style: {
           cursor: 'pointer',
+          // @ts-expect-error
           opacity: getItemProps()['aria-disabled'] ? 0.5 : 1,
-          backgroundColor: props.selected ? color.gray100 : 'unset',
+          backgroundColor: props.selected ? '#eeeeee' : 'unset',
           border: focused ? `1px solid blue` : `1px solid ${color.gray200}`,
-          marginBottom: spacing.medium,
+          marginBottom: 20,
           position: 'relative',
-          borderRadius: spacing.medium,
-          padding: spacing.small,
+          borderRadius: 20,
+          padding: 10,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          marginTop: spacing.small,
-          marginRight: spacing.small,
-          marginLeft: spacing.small,
+          marginTop: 10,
+          marginRight: 10,
+          marginLeft: 10,
         },
       })}
       onClick={onActivate}
@@ -195,13 +180,13 @@ function SlideItem({
           width: '92%',
           display: 'flex',
           alignItems: 'center',
-          padding: spacing.small,
+          padding: 10,
           backgroundColor: color.gray100,
           opacity: 0.9,
-          borderRadius: `0 0 ${spacing.medium}px ${spacing.medium}px`,
+          borderRadius: `0 0 ${20}px ${20}px`,
           color: color.gray600,
-          marginRight: spacing.small,
-          marginLeft: spacing.small,
+          marginRight: 10,
+          marginLeft: 10,
         }}
       >
         {frame !== undefined ? frame.name : 'Untitled'}
