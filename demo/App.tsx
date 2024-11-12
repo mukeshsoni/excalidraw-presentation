@@ -9,6 +9,8 @@ import {
 
 import { Presentation as ExcalidrawPresentation } from '../src/excalidraw-presentation';
 import { ExcalidrawElement } from '@excalidraw/excalidraw/types/element/types';
+import ComputerIcon from './computer-icon';
+import EmptyButton from '../src/empty-button';
 
 const demoExcalidrawData = {
   type: 'excalidraw',
@@ -142,13 +144,9 @@ const demoExcalidrawData = {
   files: {},
 };
 const App = () => {
-  const [excalidrawData, setExcalidrawData] = React.useState<{
-    elements?: readonly ExcalidrawElement[] | null;
-    appState?: Readonly<Partial<AppState>> | null;
-    libraryItems?: readonly LibraryItem[];
-  } | null>(null);
+  const height = window.innerHeight || 700;
   const [showPresentationSidebar, setShowPresentationSidebar] =
-    React.useState(true);
+    React.useState(false);
   const editorRef = React.useRef<ExcalidrawImperativeAPI | null>(null);
 
   const handleSidebarClose = () => {
@@ -157,39 +155,31 @@ const App = () => {
   const handlePresentationStart = () => {
     setShowPresentationSidebar(false);
   };
-  const handleExcalidrawChange = (
-    elements: readonly ExcalidrawElement[],
-    appState: AppState,
-  ) => {
-    // setExcalidrawData({ elements, appState });
-    if (!showPresentationSidebar) {
-      setShowPresentationSidebar;
-    }
-  };
   const togglePresentationSidebar = () => {
     setShowPresentationSidebar((prev) => !prev);
   };
 
   return (
-    <div style={{ width: '100%', height: 1000 }}>
+    <div style={{ width: '100%', height }}>
       <Excalidraw
         excalidrawAPI={(api) => {
           editorRef.current = api;
         }}
         initialData={demoExcalidrawData}
-        onChange={handleExcalidrawChange}
       >
         <Footer>
           <div style={{ width: 12 }} />
-          <button
+          <EmptyButton
             onClick={togglePresentationSidebar}
             style={{
               backgroundColor: `rgb(236, 236, 244)`,
               borderRadius: 5,
+              width: 40,
+              height: 40,
             }}
           >
-            Show pres
-          </button>
+            <ComputerIcon />
+          </EmptyButton>
         </Footer>
       </Excalidraw>
       {editorRef.current ? (
@@ -201,9 +191,7 @@ const App = () => {
           onPresentationStart={handlePresentationStart}
           onSidebarClose={handleSidebarClose}
         />
-      ) : (
-        <div>abc</div>
-      )}
+      ) : null}
     </div>
   );
 };

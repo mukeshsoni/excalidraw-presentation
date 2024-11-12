@@ -13,6 +13,8 @@ import type {
 } from '@excalidraw/excalidraw/types/element/types';
 import { ExcalidrawPreview } from './preview';
 import type { Slide } from './excalidraw-presentation';
+import EmptyButton from './empty-button';
+import DropdownMenu, { Option } from './dropdownmenu';
 
 export function getFrameElements(
   editorRef: React.RefObject<ExcalidrawImperativeAPI>,
@@ -79,7 +81,7 @@ export function PresentationSidebar({
       elements: getFrameElements(editorRef, frame!.id).elements,
     }));
 
-  function handleDragEnd(e: DragEndEvent) {
+  const handleDragEnd = (e: DragEndEvent) => {
     if (editorRef.current) {
       const { active, over } = e;
       if (!over) {
@@ -97,7 +99,16 @@ export function PresentationSidebar({
       );
       onSlideOrderChange(newFrameIds);
     }
-  }
+  };
+  const handleMenuOptionSelect = (option: Option) => {
+    // TODO
+    if (option.value === 'pdf') {
+      onDownloadAsPdf();
+    } else if (option.value === 'pptx') {
+      onDownloadAsPptx();
+    }
+  };
+
   return (
     <div
       style={{
@@ -126,13 +137,39 @@ export function PresentationSidebar({
               marginTop: 10,
             }}
           >
-            `Slides ${slides.length}`
-            <div style={{ display: 'flex' }}>
-              {slides.length > 0 ? <div>TODO: dropdown</div> : null}
-              <button onClick={onClose}>×</button>
+            Slides ({slides.length})
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              {slides.length > 0 ? (
+                <DropdownMenu
+                  options={[
+                    {
+                      value: 'pdf',
+                      label: 'Download as PDF',
+                    },
+                    {
+                      value: 'pptx',
+                      label: 'Download as PPTX',
+                    },
+                  ]}
+                  onOptionSelect={handleMenuOptionSelect}
+                />
+              ) : null}
+              <EmptyButton
+                style={{
+                  fontSize: 16,
+                }}
+                onClick={onClose}
+              >
+                ×
+              </EmptyButton>
             </div>
           </div>
-          <div
+          <ul
             style={{
               overflowY: 'auto',
               padding: 10,
@@ -147,13 +184,20 @@ export function PresentationSidebar({
                 />
               ))}
             </SortableContext>
-          </div>
+          </ul>
         </div>
       </DndContext>
       <div style={{ width: '100%' }}>
         <button
           onClick={onPresentationStartClick}
-          style={{ width: '100%' }}
+          style={{
+            width: '100%',
+            border: 'none',
+            padding: 10,
+            cursor: 'pointer',
+            backgroundColor: '#4a90e2',
+            color: '#f5f5f5',
+          }}
           disabled={slides.length === 0}
         >
           Begin presentation
@@ -206,13 +250,13 @@ function SlidePreview({ editorRef, frameId }: SlidePreviewProps) {
         style={{
           position: 'absolute',
           bottom: 0,
-          width: '101%',
+          width: '93%',
           display: 'flex',
           alignItems: 'center',
           padding: 10,
           backgroundColor: '#eeeeee',
           opacity: 0.9,
-          borderRadius: `0 0 ${10}px ${20}px`,
+          borderRadius: `0 0 ${20}px ${20}px`,
           color: '#555555',
         }}
       >

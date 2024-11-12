@@ -8,6 +8,7 @@ import {
 } from '@excalidraw/excalidraw/types/element/types';
 import { ExcalidrawPreview } from './preview';
 import { BinaryFiles } from '@excalidraw/excalidraw/types/types';
+import EmptyButton from './empty-button';
 
 function Space({ h, w }: { h?: number; w?: number }) {
   return <div style={{ width: w, height: h }} />;
@@ -97,7 +98,9 @@ export function PresentationToolbar({
             {'>'}
           </button>
           <Space w={10} />
-          <button onClick={toggleFullscreen}>Fullscreen</button>
+          <EmptyButton onClick={toggleFullscreen}>
+            {isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+          </EmptyButton>
           <Space w={10} />
           <button onClick={onDownloadAsPdf}>Pdf</button>
           <Space w={10} />
