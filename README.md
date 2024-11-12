@@ -7,7 +7,29 @@ It is inspired from (excalidraw+)[https://plus.excalidraw.com/]
 This component allows you to wrap elements in your Excalidraw canvas in frames and then present them as a slideshow.
 It also allows you do download the presentation as a PDF or a Powerpoint file and share it with others.
 
-### How to use it
+## How to use it
+
+### Install
+
+Using `npm`
+
+```bash
+npm install --save excalidraw-presentation
+```
+
+Using `yarn`
+
+```bash
+yarn add excalidraw-presentation
+```
+
+Using `pnpm`
+
+```bash
+pnpm add excalidraw-presentation
+```
+
+### Usage
 
 You can import `ExcalidrawPresentation` from `excalidraw-presentation` and use it as shown below:
 
