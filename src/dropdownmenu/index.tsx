@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './DropdownMenu.css'; // Import styles
+import './dropdownMenu.css'; // Import styles
 import EmptyButton from '../empty-button';
 
 export type Option = {
