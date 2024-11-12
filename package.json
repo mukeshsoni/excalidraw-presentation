@@ -15,8 +15,8 @@
     "type": "git",
     "url": "git+https://github.com/mukeshsoni/excalidraw-presentation.git"
   },
-  "main": "dist/excalidraw-presentation.esm.js",
-  "types": "dist/types/index.d.ts",
+  "main": "dist/excalidraw-presentation.js",
+  "types": "dist/types/excalidraw-presentation.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

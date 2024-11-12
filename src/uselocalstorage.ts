@@ -39,7 +39,6 @@ const useLocalStorage = <T>(
       : options.deserializer
     : JSON.parse;
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const initializer = useRef((key: string): T | undefined => {
     try {
       const serializer = options
@@ -50,7 +49,6 @@ const useLocalStorage = <T>(
 
       const localStorageValue = localStorage.getItem(key);
       if (localStorageValue !== null) {
-        // eslint-disable-next-line
         return deserializer(localStorageValue);
       } else {
         initialValue && localStorage.setItem(key, serializer(initialValue));
@@ -64,20 +62,15 @@ const useLocalStorage = <T>(
     }
   });
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [state, setState] = useState<T | undefined>(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    () => initializer.current(key),
+  const [state, setState] = useState<T | undefined>(() =>
+    initializer.current(key),
   );
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useLayoutEffect(() => setState(initializer.current(key)), [key]);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const set: Dispatch<SetStateAction<T | undefined>> = useCallback(
     (valOrFunc) => {
       try {
-        // eslint-disable-next-line
         const newState =
           typeof valOrFunc === 'function'
             ? (valOrFunc as (prevState: T | undefined) => T | undefined)(state)
@@ -100,11 +93,9 @@ const useLocalStorage = <T>(
         // localStorage can throw. Also JSON.stringify can throw.
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [key, setState],
   );
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const remove = useCallback(() => {
     try {
       localStorage.removeItem(key);

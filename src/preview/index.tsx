@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useRef, useEffect } from 'react';
-// eslint-disable-next-line react/no-deprecated
 import { render } from 'react-dom';
 import { exportToCanvas } from '@excalidraw/excalidraw';
 import { AppState, BinaryFiles } from '@excalidraw/excalidraw/types/types';
@@ -21,7 +20,6 @@ export const canvasToBlob = async (
         resolve(blob);
       });
     } catch (error) {
-      // eslint-disable-next-line
       reject(error);
     }
   });
@@ -104,7 +102,6 @@ export function ExcalidrawPreview({
                 );
               });
           })
-          // eslint-disable-next-line
           .catch((e: any) => {
             console.log('Error exporting to canvas', e);
           });

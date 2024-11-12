@@ -67,7 +67,7 @@ type Props = {
   onPresentationStart: () => void;
   onSidebarClose: () => void;
 };
-export function Presentation({
+export function ExcalidrawPresentation({
   canvasId,
   presName,
   showPresentationSidebar,
@@ -85,7 +85,6 @@ export function Presentation({
     [],
   );
   // We know that slides will not change if slidesFromLocalStorage does not change
-  // eslint-disable-next-line
   const slides: Slide[] = slidesFromLocalStorage || [];
   let frameIdsInCanvas = [] as Array<string>;
   if (editorRef.current) {
@@ -144,7 +143,6 @@ export function Presentation({
         const appMenu = containerRef.current.querySelector('.App-menu');
         if (appMenu) {
           // @ts-expect-error nope, it's there
-          // eslint-disable-next-line
           appMenu.style.display = 'none';
         }
         const footer = containerRef.current.querySelector('footer');
@@ -163,7 +161,6 @@ export function Presentation({
     }
   }, [isPresentationMode, currentSlideIndex, goToSlide]);
   function handlePresentationStartClick() {
-    console.log('onPresentationStart');
     setPresentationMode(true);
     onPresentationStart();
   }
@@ -330,7 +327,6 @@ export function Presentation({
       elements: getFrameElements(editorRef, frame!.id).elements,
     }));
 
-  console.log({ isPresentationMode });
   return (
     <div ref={containerRef} id="excalidraw-presentation">
       {isPresentationMode ? (
@@ -385,13 +381,6 @@ export function Presentation({
             top: 0,
             left: 0,
             zIndex: 100,
-            // TODO
-            // &.App-menu {
-            //   display: 'none',
-            // }
-            // &footer {
-            //   display: 'none',
-            // }
           }}
         >
           <ExcalidrawComponent

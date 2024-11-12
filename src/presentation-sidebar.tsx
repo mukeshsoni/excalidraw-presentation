@@ -101,7 +101,6 @@ export function PresentationSidebar({
     }
   };
   const handleMenuOptionSelect = (option: Option) => {
-    // TODO
     if (option.value === 'pdf') {
       onDownloadAsPdf();
     } else if (option.value === 'pptx') {

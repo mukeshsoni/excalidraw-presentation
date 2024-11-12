@@ -1,14 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Excalidraw, Footer } from '@excalidraw/excalidraw';
-import {
-  AppState,
-  ExcalidrawImperativeAPI,
-  LibraryItem,
-} from '@excalidraw/excalidraw/types/types';
+import { ExcalidrawImperativeAPI } from '@excalidraw/excalidraw/types/types';
 
-import { Presentation as ExcalidrawPresentation } from '../src/excalidraw-presentation';
-import { ExcalidrawElement } from '@excalidraw/excalidraw/types/element/types';
+import { ExcalidrawPresentation } from '../src/excalidraw-presentation';
 import ComputerIcon from './computer-icon';
 import EmptyButton from '../src/empty-button';
 
@@ -174,8 +169,8 @@ const App = () => {
             style={{
               backgroundColor: `rgb(236, 236, 244)`,
               borderRadius: 5,
-              width: 40,
-              height: 40,
+              width: 36,
+              height: 36,
             }}
           >
             <ComputerIcon />
