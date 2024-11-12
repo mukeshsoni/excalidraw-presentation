@@ -1,33 +1,15 @@
 {
   "compilerOptions": {
-    /* Base Options: */
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "target": "es2022",
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "moduleDetection": "force",
-    "isolatedModules": true,
-    "verbatimModuleSyntax": true,
-
+    "target": "ES2020", // Use ES2020 for modern JavaScript
+    "module": "ESNext", // ESM output (important)
+    "moduleResolution": "node",
     "jsx": "react",
-    /* Strictness */
     "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-
-    /* If transpiling with TypeScript: */
-    "module": "NodeNext",
-    "outDir": "dist",
-    "declarationDir": "dist/types",
-    "rootDir": "src",
-    "sourceMap": true,
-
-    /* AND if you're building for a library: */
-    "declaration": true,
-
-    /* AND if you're building for a library in a monorepo: */
-    "declarationMap": true
+    "declaration": true, // Generate .d.ts files for TypeScript users
+    "declarationDir": "./dist/types", // Declaration output
+    "outDir": "./dist", // Transpiled JS output
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]

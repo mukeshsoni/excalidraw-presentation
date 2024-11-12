@@ -1,9 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import MyComponent from '../src/excalidraw-presentation';
+import { Excalidraw } from '@excalidraw/excalidraw';
+import ExcalidrawPresentation from '../src/excalidraw-presentation';
 
 const App = () => {
-  return React.createElement(MyComponent, { message: 'Hello, World!' });
+  return (
+    <div style={{ width: 1000, height: 1000 }}>
+      <Excalidraw />
+    </div>
+  );
 };
 
 const rootElement = document.getElementById('root');
