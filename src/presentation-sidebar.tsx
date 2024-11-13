@@ -14,8 +14,18 @@ import type {
 import { ExcalidrawPreview } from './preview';
 import type { Slide } from './excalidraw-presentation';
 import EmptyButton from './empty-button';
-import DropdownMenu, { Option } from './dropdownmenu';
+import DropdownMenu from './dropdownmenu';
 
+const saveOptions = [
+  {
+    value: 'pdf',
+    label: 'Download as PDF',
+  },
+  {
+    value: 'pptx',
+    label: 'Download as PPTX',
+  },
+] as const;
 export function getFrameElements(
   editorRef: React.RefObject<ExcalidrawImperativeAPI>,
   frameId: string,
@@ -100,10 +110,10 @@ export function PresentationSidebar({
       onSlideOrderChange(newFrameIds);
     }
   };
-  const handleMenuOptionSelect = (option: Option) => {
-    if (option.value === 'pdf') {
+  const handleMenuOptionSelect = (option: 'pdf' | 'pptx') => {
+    if (option === 'pdf') {
       onDownloadAsPdf();
-    } else if (option.value === 'pptx') {
+    } else if (option === 'pptx') {
       onDownloadAsPptx();
     }
   };
@@ -145,17 +155,19 @@ export function PresentationSidebar({
             >
               {slides.length > 0 ? (
                 <DropdownMenu
-                  options={[
-                    {
-                      value: 'pdf',
-                      label: 'Download as PDF',
-                    },
-                    {
-                      value: 'pptx',
-                      label: 'Download as PPTX',
-                    },
-                  ]}
-                  onOptionSelect={handleMenuOptionSelect}
+                  trigger={
+                    <EmptyButton style={{ fontSize: 20 }}>
+                      &#x22EE; {/* Triple dot icon */}
+                    </EmptyButton>
+                  }
+                  options={saveOptions.map((o) => (
+                    <EmptyButton
+                      onClick={() => handleMenuOptionSelect(o.value)}
+                      style={{ fontSize: 12 }}
+                    >
+                      {o.label}
+                    </EmptyButton>
+                  ))}
                 />
               ) : null}
               <EmptyButton

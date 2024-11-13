@@ -8,7 +8,7 @@ export default function BlankCanvasPreviewGraphics(): React.ReactElement {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <title>whiteboard-empty</title>
+      <title>Empty canvas</title>
       <g
         id="spec"
         stroke="none"
@@ -17,15 +17,8 @@ export default function BlankCanvasPreviewGraphics(): React.ReactElement {
         fillRule="evenodd"
         opacity="0.699999988"
       >
-        <g
-          id="whiteboard---tile-view-copy-2"
-          transform="translate(-342.000000, -177.000000)"
-          fillRule="nonzero"
-        >
-          <g
-            id="whiteboard-empty"
-            transform="translate(457.000000, 260.000000) scale(-1, 1) translate(-457.000000, -260.000000) translate(342.000000, 177.000000)"
-          >
+        <g transform="translate(-342.000000, -177.000000)" fillRule="nonzero">
+          <g transform="translate(457.000000, 260.000000) scale(-1, 1) translate(-457.000000, -260.000000) translate(342.000000, 177.000000)">
             <polygon
               id="Path"
               fill="#E5E5E5"

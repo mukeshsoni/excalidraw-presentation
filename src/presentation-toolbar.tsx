@@ -6,6 +6,7 @@ import {
 import { ExcalidrawPreview } from './preview';
 import { BinaryFiles } from '@excalidraw/excalidraw/types/types';
 import EmptyButton from './empty-button';
+import DropdownMenu from './dropdownmenu';
 
 function Space({ h, w }: { h?: number; w?: number }) {
   return <div style={{ width: w, height: h }} />;
@@ -75,18 +76,23 @@ export function PresentationToolbar({
             {'<'}
           </button>
           <Space w={10} />
-          <div style={{ display: 'none' }}>
-            TODO: Slide selector
-            {frames.map((frame) => (
-              <SlideItem
-                label={frame.name || 'Untitled'}
-                onActivate={onSlideSelect.bind(null, frame.id)}
-                key={`slide_selector_${frame.id}`}
-                frame={frame}
-                files={files}
+          {frames.length > 0 ? (
+            <div style={{ display: 'none' }}>
+              TODO: Slide selector
+              <DropdownMenu
+                position="top"
+                options={frames.map((frame) => (
+                  <SlideItem
+                    label={frame.name || 'Untitled'}
+                    onActivate={onSlideSelect.bind(null, frame.id)}
+                    key={`slide_selector_${frame.id}`}
+                    frame={frame}
+                    files={files}
+                  />
+                ))}
               />
-            ))}
-          </div>
+            </div>
+          ) : null}
           <Space w={10} />
           <button
             onClick={onNextSlideClick}
@@ -123,6 +129,7 @@ function useListItem(props: any) {
     onActivate: () => {},
     getItemProps: (props: { style: React.CSSProperties }) => ({
       'aria-disabled': false,
+      style: props?.style,
     }),
   };
 }
