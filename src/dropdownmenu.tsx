@@ -1,15 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-type Position = 'top' | 'bottom' | 'left' | 'right';
-
 type DropdownProps = {
-  position?: Position;
+  position?: 'top' | 'bottom';
   options: React.ReactNode[];
   trigger?: React.ReactNode;
 };
 
-const Dropdown: React.FC<DropdownProps> = ({ position, options, trigger }) => {
+const Dropdown: React.FC<DropdownProps> = ({
+  position = 'bottom',
+  options,
+  trigger,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [menuStyles, setMenuStyles] = useState({});
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -28,27 +30,6 @@ const Dropdown: React.FC<DropdownProps> = ({ position, options, trigger }) => {
     }
   };
 
-  const calculateOptimalPosition = (
-    triggerRect: DOMRect,
-    menuWidth: number,
-    menuHeight: number,
-  ): Position => {
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-
-    const spaceBelow = viewportHeight - triggerRect.bottom;
-    const spaceAbove = triggerRect.top;
-    const spaceRight = viewportWidth - triggerRect.right;
-    const spaceLeft = triggerRect.left;
-
-    if (spaceBelow >= menuHeight) return 'bottom';
-    if (spaceAbove >= menuHeight) return 'top';
-    if (spaceRight >= menuWidth) return 'right';
-    if (spaceLeft >= menuWidth) return 'left';
-
-    return 'bottom'; // Default to bottom if no other option fits
-  };
-
   useEffect(() => {
     if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside);
@@ -58,54 +39,19 @@ const Dropdown: React.FC<DropdownProps> = ({ position, options, trigger }) => {
         const menuWidth = dropdownRef.current
           ? dropdownRef.current.offsetWidth
           : 0;
-        const menuHeight = dropdownRef.current
-          ? dropdownRef.current.offsetHeight
-          : 0;
+        const viewportWidth = window.innerWidth;
 
-        // Determine the position to use
-        const calculatedPosition =
-          position ||
-          calculateOptimalPosition(triggerRect, menuWidth, menuHeight);
-
-        // Set menu styles based on the calculated position
-        let top = 0;
-        let left = 0;
-        let transform = '';
-
-        switch (calculatedPosition) {
-          case 'top':
-            top = triggerRect.top;
-            left = triggerRect.left;
-            transform = 'translateY(-100%)';
-            break;
-          case 'bottom':
-            top = triggerRect.bottom;
-            left = triggerRect.left;
-            break;
-          case 'left':
-            top = triggerRect.top;
-            left = triggerRect.left;
-            transform = 'translateX(-100%)';
-            break;
-          case 'right':
-            top = triggerRect.top;
-            left = triggerRect.right;
-            break;
-          default:
-            break;
+        // Adjust the horizontal position to prevent clipping
+        let left = triggerRect.left;
+        if (left + menuWidth > viewportWidth) {
+          left = viewportWidth - menuWidth - 10; // add small padding from viewport edge
         }
+        left = Math.max(left, 10); // ensure it doesn’t go off the left side of the screen
 
-        // Ensure menu stays within viewport horizontally
-        if (left + menuWidth > window.innerWidth) {
-          left = window.innerWidth - menuWidth - 10; // add small padding from viewport edge
-        }
-        left = Math.max(left, 10); // prevent clipping on the left
-
-        // Ensure menu stays within viewport vertically
-        if (top + menuHeight > window.innerHeight) {
-          top = window.innerHeight - menuHeight - 10; // add small padding from viewport edge
-        }
-        top = Math.max(top, 10); // prevent clipping at the top
+        // Calculate vertical position based on the `position` prop
+        const top = position === 'top' ? triggerRect.top : triggerRect.bottom;
+        const transform =
+          position === 'top' ? 'translateY(-100%)' : 'translateY(0)';
 
         setMenuStyles({
           top,
@@ -137,7 +83,7 @@ const Dropdown: React.FC<DropdownProps> = ({ position, options, trigger }) => {
       }}
     >
       {options.map((option, index) => (
-        <div key={index} style={{ padding: '4px 8px', cursor: 'pointer' }}>
+        <div key={index} style={{ padding: '10px 15px', cursor: 'pointer' }}>
           {option}
         </div>
       ))}

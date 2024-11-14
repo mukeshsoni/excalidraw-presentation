@@ -106,3 +106,12 @@ What we have done above is
 - `showPresentationSidebar`: A boolean to show/hide the presentation sidebar.
 - `onPresentationStart`: A callback function which is called when the presentation is started. You can use that to hide the prsentation sidebar.
 - `onSidebarClose`: A callback function which is called when the sidebar close button is clicked.
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+`npm run dev` will start a vite server. You should see the server address on the command line. Open that address in your browser to see the demo app.
