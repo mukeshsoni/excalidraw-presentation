@@ -2,7 +2,7 @@
 
 This is a library which you can use along with excalidraw library to add a presentation feature to excalidraw.
 
-It is inspired from (excalidraw+)[https://plus.excalidraw.com/]
+It is inspired from [excalidraw+](https://plus.excalidraw.com/)
 
 This component allows you to wrap elements in your Excalidraw canvas in frames and then present them as a slideshow.
 It also allows you do download the presentation as a PDF or a Powerpoint file and share it with others.
