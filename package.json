@@ -1,6 +1,6 @@
 {
   "name": "excalidraw-presentation",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Add presentation feature to the excalidraw library",
   "keywords": [
     "excalidraw",
@@ -19,7 +19,7 @@
   "types": "dist/types/excalidraw-presentation.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc",
     "ci": "npm run build && npm run check-format && npm run check-exports",
     "format": "prettier --write .",
     "check-format": "prettier --check .",
